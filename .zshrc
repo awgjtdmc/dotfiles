@@ -110,11 +110,11 @@ function tmuxnew() {
 # 其他函数
 
 function precmd {
- # vcs_info
- # Put the string "hostname::/full/directory/path" in the title bar:
- echo -ne "\e]2;$PWD\a"
- # Put the parentdir/currentdir in the tab
- echo -ne "\e]1;$PWD:h:t/$PWD:t\a"
+  # vcs_info
+  # Put the string "hostname::/full/directory/path" in the title bar:
+  echo -ne "\e]2;$PWD\a"
+  # Put the parentdir/currentdir in the tab
+  echo -ne "\e]1;$PWD:h:t/$PWD:t\a"
 }
 
 function hostinfo {
@@ -128,15 +128,14 @@ function hostinfo {
 }
 
 function showpath {
- for dir in `echo "$PATH" | tr ':' ' '`
- do
+  for dir in `echo "$PATH" | tr ':' ' '`
+  do
      echo "执行路径有: $dir"
- done
+  done
 }
 
 # 给man页面着色
-function man()
-{
+function man() {
     env \
     LESS_TERMCAP_mb=$(printf "\e[1;31m") \
     LESS_TERMCAP_md=$(printf "\e[1;31m") \
@@ -149,8 +148,7 @@ function man()
 }
 
 # 获取本机IP地址，可能需要修改网卡参数
-function myip()
-{
+function myip() {
     extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
     printf "Wireless IP: "
@@ -170,7 +168,7 @@ function myip()
 }
 
 function current_pwd {
- echo $(pwd | sed -e "s,^$HOME,~,")
+  echo $(pwd | sed -e "s,^$HOME,~,")
 }
 
 # Zshell的配置
@@ -186,7 +184,6 @@ setopt complete_in_word # Allow completion from within a word/phrase
 
 setopt correct # spelling correction for commands
 setopt correctall # spelling correction for arguments
-
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
