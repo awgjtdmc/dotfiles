@@ -8,7 +8,6 @@ export ZSH="/root/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-
 # 使用自己喜欢的主题
 ZSH_THEME="xiong-chiamiov"
 
@@ -46,6 +45,7 @@ alias mv='mv -i'
 alias now='date +"%T"'
 alias hosts="vim /etc/hosts"
 alias pi="pip install"
+# 改成自己的城市
 alias w='curl -H"Accept-Language: zh-CN" wttr.in/HangZhou'
 alias game='/usr/bin/2048.sh'   # https://github.com/mydzor/bash2048/blob/master/bash2048.sh
 # for fun
@@ -91,6 +91,7 @@ alias ga="git add"
 alias gd="git diff"
 alias gs="git status"
 alias gst="git stash"
+alias gp="git push"
 alias gstp="git stash pop"
 # 其他杂项
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10' ## Get server cpu info ##
@@ -116,7 +117,16 @@ function precmd {
  echo -ne "\e]1;$PWD:h:t/$PWD:t\a"
 }
 
-# 显示可系统执行程序的路径
+function hostinfo {
+  echo "主机名:"  $HOSTNAME
+  cpuinfo=$(cat /proc/cpuinfo | grep name | cut -c 13-50 | head -n 1)
+  echo "CPU型号:" "$cpuinfo"
+  cpus=$(cat /proc/cpuinfo | grep name | cut -c 13-50 | wc -l)
+  echo "CPU核数:" "$cpus"
+  mem=$(cat /proc/meminfo | grep MemTotal)
+  echo "$mem"
+}
+
 function showpath {
  for dir in `echo "$PATH" | tr ':' ' '`
  do
@@ -125,7 +135,8 @@ function showpath {
 }
 
 # 给man页面着色
-function man() {
+function man()
+{
     env \
     LESS_TERMCAP_mb=$(printf "\e[1;31m") \
     LESS_TERMCAP_md=$(printf "\e[1;31m") \
@@ -138,7 +149,8 @@ function man() {
 }
 
 # 获取本机IP地址，可能需要修改网卡参数
-function myip() {
+function myip()
+{
     extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
     printf "Wireless IP: "
@@ -263,3 +275,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
